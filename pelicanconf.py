@@ -1,6 +1,10 @@
 AUTHOR = "Andrew Selzer"
 SITENAME = "Andrew Selzer"
+SITESUBTITLE = "> full-stack senior developer"
 SITEURL = ""
+
+THEME = "themes/papyrus-cyberpunk"
+DISPLAY_PAGES_ON_MENU = True
 
 PATH = "content"
 TIMEZONE = "America/New_York"
@@ -14,6 +18,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 DEFAULT_PAGINATION = 10
+PAGINATED_TEMPLATES = {"index": None, "archives": None}
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True

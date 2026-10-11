@@ -1,0 +1,333 @@
+/* ==========================================================================
+   Cyberpunk Netrunner skin for Papyrus
+   Loaded after main.css + pygment.css — overrides Tailwind's compiled
+   utility classes directly rather than rebuilding the Tailwind pipeline.
+   ========================================================================== */
+
+:root {
+    --void: #0b0614;
+    --panel: #130a24;
+    --panel-line: #241642;
+    --cyan: #00e5ff;
+    --magenta: #ff2bd6;
+    --violet: #a64dff;
+    --text: #d8d4e8;
+    --text-dim: #8b84ab;
+    --glow-cyan: 0 0 4px #00e5ff, 0 0 14px rgba(0, 229, 255, .55);
+    --glow-magenta: 0 0 4px #ff2bd6, 0 0 14px rgba(255, 43, 214, .55);
+    --glow-violet: 0 0 4px #a64dff, 0 0 14px rgba(166, 77, 255, .5);
+}
+
+/* ---- base surface -------------------------------------------------- */
+
+html,
+body,
+.dark .dark\:bg-neutral-900,
+.bg-neutral-100 {
+    background-color: var(--void) !important;
+}
+
+body {
+    font-family: 'Share Tech Mono', ui-monospace, Menlo, Consolas, monospace;
+    color: var(--text);
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-semibold,
+.font-bold {
+    font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
+    letter-spacing: .02em;
+}
+
+/* ---- text / border color overrides (Tailwind dark: variants) ------- */
+
+.text-zinc-800,
+.dark .dark\:text-zinc-300,
+.dark .dark\:text-gray-300 {
+    color: var(--text) !important;
+}
+
+.text-zinc-700,
+.dark .dark\:text-zinc-400,
+.text-zinc-600 {
+    color: var(--text-dim) !important;
+}
+
+.border-zinc-800,
+.dark .dark\:border-zinc-300,
+.border-zinc-500 {
+    border-color: var(--violet) !important;
+}
+
+p a,
+.dark p a {
+    color: var(--cyan) !important;
+    text-decoration-color: var(--magenta) !important;
+    transition: text-shadow .2s ease, color .2s ease;
+}
+
+p a:hover {
+    color: var(--magenta) !important;
+    text-shadow: var(--glow-magenta);
+}
+
+/* prose (article body) dark-mode token overrides */
+.dark .prose-headings\:dark\:text-zinc-300 :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~="not-prose"] *))) {
+    color: var(--text) !important;
+}
+
+.dark .dark\:prose-a\:text-slate-400 :is(:where(a):not(:where([class~="not-prose"] *))) {
+    color: var(--cyan) !important;
+}
+
+.dark .dark\:prose-blockquote\:text-zinc-200 :is(:where(blockquote):not(:where([class~="not-prose"] *))) {
+    color: var(--violet) !important;
+    border-left-color: var(--magenta) !important;
+}
+
+.dark .dark\:prose-strong\:text-zinc-200 :is(:where(strong):not(:where([class~="not-prose"] *))) {
+    color: var(--magenta) !important;
+}
+
+.dark .dark\:prose-code\:bg-zinc-800 :is(:where(code):not(:where([class~="not-prose"] *))) {
+    background-color: var(--panel) !important;
+}
+
+.dark .dark\:prose-code\:text-zinc-200 :is(:where(code):not(:where([class~="not-prose"] *))) {
+    color: var(--cyan) !important;
+}
+
+.dark .dark\:prose-pre\:bg-zinc-800 :is(:where(pre):not(:where([class~="not-prose"] *))) {
+    background-color: var(--panel) !important;
+    border: 1px solid var(--panel-line);
+    box-shadow: inset 0 0 20px rgba(166, 77, 255, .08);
+}
+
+.dark .dark\:prose-pre\:text-zinc-200 :is(:where(pre):not(:where([class~="not-prose"] *))) {
+    color: var(--text) !important;
+}
+
+/* pagination buttons */
+.bg-zinc-800,
+.dark .dark\:bg-zinc-300 {
+    background-color: var(--panel) !important;
+    border: 1px solid var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+.text-zinc-100,
+.dark .dark\:text-zinc-800 {
+    color: var(--cyan) !important;
+}
+
+.dark .dark\:hover\:bg-zinc-800:hover {
+    background-color: var(--panel) !important;
+    box-shadow: var(--glow-magenta);
+}
+
+/* ---- nav / site title ----------------------------------------------- */
+
+nav a {
+    transition: color .2s ease, text-shadow .2s ease;
+}
+
+nav a:hover {
+    color: var(--cyan) !important;
+    text-shadow: var(--glow-cyan);
+}
+
+li > a.border-b-2 {
+    border-color: var(--magenta) !important;
+    color: var(--magenta) !important;
+    text-shadow: var(--glow-magenta);
+}
+
+.cyber-title a {
+    background: linear-gradient(90deg, var(--cyan), var(--magenta) 60%, var(--violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    animation: title-pulse 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes title-pulse {
+    from { filter: drop-shadow(0 0 2px rgba(0, 229, 255, .35)); }
+    to   { filter: drop-shadow(0 0 10px rgba(255, 43, 214, .55)); }
+}
+
+/* one-shot glitch flicker on load */
+.glitch {
+    position: relative;
+}
+
+.glitch a {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.glitch::before {
+    color: var(--cyan);
+    animation: glitch-flicker 0.7s steps(2, end) 1;
+}
+
+.glitch::after {
+    color: var(--magenta);
+    animation: glitch-flicker-2 0.7s steps(2, end) 1;
+}
+
+@keyframes glitch-flicker {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    10%  { opacity: .8; transform: translate(-2px, 1px); }
+    25%  { opacity: 0; }
+    40%  { opacity: .7; transform: translate(2px, -1px); }
+    55%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes glitch-flicker-2 {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    15%  { opacity: .7; transform: translate(2px, -1px); }
+    30%  { opacity: 0; }
+    45%  { opacity: .6; transform: translate(-2px, 1px); }
+    60%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.cyber-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .08em;
+    color: var(--text-dim);
+    margin-top: .1rem;
+}
+
+/* status badge */
+.cyber-status {
+    margin-left: .75rem;
+    margin-top: 1rem;
+    font-size: .65rem;
+    letter-spacing: .15em;
+    color: var(--cyan);
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+}
+
+.cyber-status-dot {
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    background: var(--magenta);
+    box-shadow: var(--glow-magenta);
+    animation: dot-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .25; }
+}
+
+/* ---- ambient background: grid + scanlines --------------------------- */
+
+.cyber-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(166, 77, 255, .12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, .08) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 85%);
+}
+
+.cyber-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 229, 255, .025) 3px,
+        rgba(0, 0, 0, 0) 4px
+    );
+    opacity: .5;
+}
+
+/* ---- code blocks (pygments) ------------------------------------------ */
+
+.highlight,
+.highlight .hll {
+    background: var(--panel) !important;
+}
+
+.highlight .c, .highlight .ch, .highlight .cm, .highlight .cp,
+.highlight .cpf, .highlight .c1, .highlight .cs {
+    color: #6c6490 !important;
+    font-style: italic;
+}
+
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kt, .highlight .ow, .highlight .nt {
+    color: var(--magenta) !important;
+}
+
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc,
+.highlight .dl, .highlight .s1, .highlight .s2 {
+    color: var(--cyan) !important;
+}
+
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh,
+.highlight .mi, .highlight .mo {
+    color: var(--violet) !important;
+}
+
+.highlight .nf, .highlight .nc, .highlight .nb, .highlight .nd {
+    color: #ff7edb !important;
+}
+
+.highlight .o, .highlight .p {
+    color: var(--text) !important;
+}
+
+.highlight .g, .highlight .n, .highlight .x, .highlight .na,
+.highlight .nx, .highlight .nv, .highlight .no, .highlight .nn, .highlight .py {
+    color: var(--text) !important;
+}
+
+.highlight .gh { color: var(--cyan) !important; }
+.highlight .gu { color: var(--violet) !important; }
+.highlight .gd { color: #ff5f6d !important; }
+.highlight .gi { color: #39ff88 !important; }
+.highlight .gr, .highlight .gt { color: #ff5f6d !important; }
+
+/* ---- scrollbar -------------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--void);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--cyan), var(--magenta));
+    border-radius: 6px;
+}
