@@ -1,0 +1,10 @@
+# Pelican build output
+output/
+
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# Editor/OS
+.DS_Store

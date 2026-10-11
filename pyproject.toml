@@ -1,0 +1,8 @@
+[project]
+name = "programming-website"
+version = "0.1.0"
+description = "Andrew Selzer's personal website, built with Pelican"
+requires-python = ">=3.12"
+dependencies = [
+    "pelican[markdown]>=4.12.0",
+]
