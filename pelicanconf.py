@@ -8,6 +8,11 @@ SITE_DESCRIPTION = (
 )
 SITEURL = ""
 
+# Default link-preview image (Open Graph / Twitter). A post can override it with
+# an `Image: images/whatever.jpg` metadata line.
+SOCIAL_IMAGE = "images/social-card.jpg"
+SOCIAL_IMAGE_ALT = "Andrew Selzer, Python & Django developer in Somerville, MA"
+
 # Profiles verified with rel="me" (e.g. Mastodon's green checkmark) — rendered in <head>
 REL_ME = ["https://mastodon.social/@AndrewSelzer"]
 
@@ -69,7 +74,16 @@ AUTHOR_FEED_RSS = None
 STATIC_PATHS = ["images", "extra"]
 EXTRA_PATH_METADATA = {
     "extra/robots.txt": {"path": "robots.txt"},
+    "extra/favicon.ico": {"path": "favicon.ico"},
+    "extra/favicon.svg": {"path": "favicon.svg"},
+    "extra/apple-touch-icon.png": {"path": "apple-touch-icon.png"},
 }
+
+# Single author, single category: skip the thin author/category/tag listing pages
+DIRECT_TEMPLATES = ["index", "archives"]
+AUTHOR_SAVE_AS = ""
+CATEGORY_SAVE_AS = ""
+TAG_SAVE_AS = ""
 
 # Sitemap (pelican-sitemap plugin) — written to /sitemap.xml
 PLUGINS = ["sitemap"]
