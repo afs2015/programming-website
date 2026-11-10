@@ -331,3 +331,94 @@ li > a.border-b-2 {
     background: linear-gradient(var(--cyan), var(--magenta));
     border-radius: 6px;
 }
+
+/* ---- headshot (about page) ----------------------------------------- */
+
+img.headshot {
+    display: block;
+    width: 176px;
+    height: 176px;
+    object-fit: cover;
+    border-radius: 9999px;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--cyan), var(--violet), var(--magenta));
+    box-shadow: 0 0 18px rgba(166, 77, 255, .45), 0 0 40px rgba(0, 229, 255, .15);
+    margin: 0 auto 2rem;
+}
+
+@media (min-width: 640px) {
+    img.headshot {
+        float: right;
+        margin: .25rem 0 1rem 2.5rem;
+        shape-outside: circle(50%);
+    }
+}
+
+/* ---- homepage ------------------------------------------------------- */
+
+.home-intro::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.cyber-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: .85rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    padding-bottom: .5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--panel-line);
+}
+
+.home-post {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .25rem 1rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: .75rem;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: .5rem;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.home-post:hover {
+    border-color: var(--violet);
+    box-shadow: 0 0 14px rgba(166, 77, 255, .3);
+}
+
+.home-post-title {
+    color: var(--text);
+    font-size: 1.1rem;
+}
+
+.home-post:hover .home-post-title {
+    color: var(--magenta);
+}
+
+.home-post-date {
+    color: var(--text-dim);
+    font-size: .8rem;
+    white-space: nowrap;
+    align-self: center;
+}
+
+.home-post-summary {
+    grid-column: 1 / -1;
+    color: var(--text-dim);
+    font-size: .9rem;
+}
+
+.home-all-posts {
+    display: inline-block;
+    margin-top: .5rem;
+    color: var(--cyan);
+}
+
+.home-all-posts:hover {
+    color: var(--magenta);
+    text-shadow: var(--glow-magenta);
+}

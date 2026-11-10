@@ -50,12 +50,8 @@
             {% endif %}
         </div>
         <ul class="flex flex-wrap lg:mr-24 md:pt-0">
-            {% if DISPLAY_PAGES_ON_MENU %}
-            {% for p in pages if p.title == "About" %}
-            <li class="mr-4 pt-6"><a {% if p==page %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
-                    {% endif %} href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-            {% endfor %}
-            {% endif %}
+            <li class="mr-4 pt-6"><a {% if current=="home" %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
+                    {% endif %} href="{{ SITEURL }}/">Home</a></li>
             <li class="mr-4 pt-6"><a {% if current=="archive" %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
                     {% endif %} href="{{ SITEURL }}/archives.html">Blog</a></li>
             {% if DISPLAY_PAGES_ON_MENU %}

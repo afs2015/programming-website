@@ -18,7 +18,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 DEFAULT_PAGINATION = 10
-PAGINATED_TEMPLATES = {"index": None, "archives": None}
+PAGINATED_TEMPLATES = {"archives": None}
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
