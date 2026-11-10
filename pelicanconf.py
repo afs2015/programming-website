@@ -61,6 +61,27 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+# Static files copied as-is; robots.txt is served from the site root
+STATIC_PATHS = ["images", "extra"]
+EXTRA_PATH_METADATA = {
+    "extra/robots.txt": {"path": "robots.txt"},
+}
+
+# Sitemap (pelican-sitemap plugin) — written to /sitemap.xml
+PLUGINS = ["sitemap"]
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 0.7, "indexes": 1.0, "pages": 0.5},
+    "changefreqs": {"articles": "monthly", "indexes": "weekly", "pages": "monthly"},
+    # Low-value listing pages and the about -> home redirect stay out of the sitemap
+    "exclude": [
+        r"^pages/about\.html$",
+        r"^authors?(/|\.html)",
+        r"^categor(y|ies)(/|\.html)",
+        r"^tags?(/|\.html)",
+    ],
+}
+
 DEFAULT_PAGINATION = 10
 PAGINATED_TEMPLATES = {"archives": None}
 
