@@ -8,6 +8,45 @@ SITE_DESCRIPTION = (
 )
 SITEURL = ""
 
+# Structured data (JSON-LD) describing the site owner — see templates/jsonld.html
+PERSON = {
+    "jobTitle": "Full-Stack Software Engineer",
+    "image": "images/andrew-selzer-headshot.jpg",
+    "locality": "Somerville",
+    "region": "MA",
+    "country": "US",
+    "alumniOf": "The Pennsylvania State University",
+    "knowsAbout": [
+        "Python",
+        "Django",
+        "Flask",
+        "JavaScript",
+        "HTMX",
+        "Alpine.js",
+        "PostgreSQL",
+        "Apache Airflow",
+        "AWS",
+        "Open source",
+        "Web development",
+    ],
+    "sameAs": [
+        "https://github.com/afs2015",
+        "https://www.linkedin.com/in/andrew-selzer/",
+        "https://andrewselzer.com",
+    ],
+    "talks": [
+        {
+            "name": "Enter the Ecosystem: Contributing to Django Open Source Projects",
+            "event": "DjangoCon US 2026",
+            "startDate": "2026-08-24",
+            "endDate": "2026-08-28",
+            "city": "Chicago",
+            "region": "IL",
+            "video": "https://www.youtube.com/watch?v=ciJndAym7BA",
+        },
+    ],
+}
+
 THEME = "themes/papyrus-cyberpunk"
 DISPLAY_PAGES_ON_MENU = True
 

@@ -30,6 +30,7 @@
         href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}"
         type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
     {% endif %}
+    {% include 'jsonld.html' %}
     {% endblock head %}
 </head>
 

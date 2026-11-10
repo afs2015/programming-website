@@ -1,0 +1,88 @@
+{#- Structured data (schema.org JSON-LD). Person details live in PERSON in pelicanconf.py. -#}
+{%- if PERSON -%}
+{%- set home = SITEURL ~ "/" -%}
+{%- set person_id = home ~ "#person" -%}
+{%- set website_id = home ~ "#website" -%}
+
+{%- set talks = [] -%}
+{%- for t in PERSON.talks -%}
+{%- set _ = talks.append({
+    "@type": "Event",
+    "name": t.name,
+    "startDate": t.startDate,
+    "endDate": t.endDate,
+    "superEvent": {"@type": "Event", "name": t.event},
+    "location": {
+        "@type": "Place",
+        "name": t.city ~ ", " ~ t.region,
+        "address": {"@type": "PostalAddress", "addressLocality": t.city, "addressRegion": t.region, "addressCountry": "US"}
+    },
+    "recordedIn": {"@type": "VideoObject", "name": t.name, "url": t.video, "contentUrl": t.video},
+    "url": t.video
+}) -%}
+{%- endfor -%}
+
+{%- set person = {
+    "@type": "Person",
+    "@id": person_id,
+    "name": AUTHOR,
+    "url": home,
+    "image": SITEURL ~ "/" ~ PERSON.image,
+    "jobTitle": PERSON.jobTitle,
+    "description": SITE_DESCRIPTION,
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": PERSON.locality,
+        "addressRegion": PERSON.region,
+        "addressCountry": PERSON.country
+    },
+    "alumniOf": {"@type": "CollegeOrUniversity", "name": PERSON.alumniOf},
+    "knowsAbout": PERSON.knowsAbout,
+    "sameAs": PERSON.sameAs,
+    "performerIn": talks
+} -%}
+
+{%- set website = {
+    "@type": "WebSite",
+    "@id": website_id,
+    "name": SITENAME,
+    "url": home,
+    "description": SITE_DESCRIPTION,
+    "inLanguage": DEFAULT_LANG,
+    "author": {"@id": person_id},
+    "publisher": {"@id": person_id}
+} -%}
+
+{%- set graph = [website, person] -%}
+
+{%- if current == "home" -%}
+{%- set _ = graph.append({
+    "@type": "ProfilePage",
+    "@id": home ~ "#profilepage",
+    "url": home,
+    "name": SITENAME ~ " — " ~ SITE_TAGLINE,
+    "isPartOf": {"@id": website_id},
+    "mainEntity": {"@id": person_id}
+}) -%}
+{%- elif article -%}
+{%- set post_url = SITEURL ~ "/" ~ article.url -%}
+{%- set post = {
+    "@type": "BlogPosting",
+    "@id": post_url ~ "#post",
+    "url": post_url,
+    "mainEntityOfPage": post_url,
+    "headline": article.title | striptags,
+    "description": (article.summary or SITE_DESCRIPTION) | striptags | trim,
+    "datePublished": article.date.isoformat(),
+    "dateModified": (article.modified or article.date).isoformat(),
+    "author": {"@id": person_id, "@type": "Person", "name": AUTHOR, "url": home},
+    "publisher": {"@id": person_id},
+    "image": SITEURL ~ "/" ~ PERSON.image,
+    "isPartOf": {"@id": website_id},
+    "inLanguage": article.lang or DEFAULT_LANG
+} -%}
+{%- if article.tags -%}{%- set _ = post.update({"keywords": article.tags | map("string") | list}) -%}{%- endif -%}
+{%- set _ = graph.append(post) -%}
+{%- endif %}
+    <script type="application/ld+json">{{ {"@context": "https://schema.org", "@graph": graph} | tojson }}</script>
+{%- endif %}
