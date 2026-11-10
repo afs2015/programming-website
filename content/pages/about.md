@@ -18,5 +18,6 @@ I care a lot about open source and making it less intimidating to get started.
 When I'm not coding, I'm usually dancing, or playing
 music ([andrewselzer.com](https://andrewselzer.com)).
 
-You can find me at
-[LinkedIn](https://www.linkedin.com/in/andrew-selzer/).
+You can find me on
+[LinkedIn](https://www.linkedin.com/in/andrew-selzer/) and
+<a rel="me" href="https://mastodon.social/@AndrewSelzer">Mastodon</a>.

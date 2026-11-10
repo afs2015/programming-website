@@ -8,6 +8,9 @@ SITE_DESCRIPTION = (
 )
 SITEURL = ""
 
+# Profiles verified with rel="me" (e.g. Mastodon's green checkmark) — rendered in <head>
+REL_ME = ["https://mastodon.social/@AndrewSelzer"]
+
 # Structured data (JSON-LD) describing the site owner — see templates/jsonld.html
 PERSON = {
     "jobTitle": "Full-Stack Software Engineer",
@@ -33,6 +36,7 @@ PERSON = {
         "https://github.com/afs2015",
         "https://www.linkedin.com/in/andrew-selzer/",
         "https://andrewselzer.com",
+        "https://mastodon.social/@AndrewSelzer",
     ],
     "talks": [
         {
