@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set current = "404" %}
+
+{% block title %}Page not found | {{ SITENAME }}{% endblock %}
+{% block description %}This page doesn't exist. Head back to the homepage or the blog.{% endblock %}
+
+{% block head %}
+{{ super() }}
+    <meta name="robots" content="noindex" />
+{% endblock %}
+
+{% block content %}
+<section class="notfound" aria-labelledby="notfound-title">
+    <h1 id="notfound-title" class="notfound-title">
+        <span class="notfound-code" data-text="404" aria-hidden="true">404</span>
+        <span class="notfound-label">Signal lost</span>
+        <span class="sr-only">Page not found</span>
+    </h1>
+
+    <div class="notfound-terminal" role="presentation">
+        <p><span class="prompt">&gt;</span> GET <span class="notfound-path">this page</span></p>
+        <p><span class="prompt">&gt;</span> <span class="err">ERR 404</span> route not found on this node</p>
+        <p><span class="prompt">&gt;</span> it may have moved, or never existed<span class="cursor" aria-hidden="true"></span></p>
+    </div>
+
+    <p class="notfound-help">The link you followed is broken or the page was moved. Try one of these instead:</p>
+
+    <ul class="notfound-links">
+        <li><a class="notfound-btn" href="{{ SITEURL }}/">&larr; Back home</a></li>
+        <li><a class="notfound-btn notfound-btn--alt" href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Read the blog</a></li>
+    </ul>
+</section>
+
+<script>
+    // Show the path the visitor actually asked for (text only, never HTML)
+    (function () {
+        var el = document.querySelector(".notfound-path");
+        if (!el || !location.pathname) return;
+        try { el.textContent = decodeURIComponent(location.pathname); }
+        catch (e) { el.textContent = location.pathname; }
+    })();
+</script>
+{% endblock %}

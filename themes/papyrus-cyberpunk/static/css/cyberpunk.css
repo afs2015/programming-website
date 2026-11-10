@@ -567,3 +567,161 @@ li > a.border-b-2 {
     color: var(--magenta);
     text-shadow: var(--glow-magenta);
 }
+
+/* ---- 404 page ------------------------------------------------------- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.notfound {
+    margin: 4rem 0 2rem;
+}
+
+.notfound-title {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin: 0 0 2rem;
+}
+
+.notfound-code {
+    position: relative;
+    display: inline-block;
+    align-self: flex-start;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(4.5rem, 18vw, 8rem);
+    line-height: 1;
+    background: linear-gradient(90deg, var(--cyan), var(--violet) 55%, var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 16px rgba(166, 77, 255, .45));
+}
+
+/* RGB-split glitch copies of "404", firing every few seconds */
+.notfound-code::before,
+.notfound-code::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    -webkit-background-clip: initial;
+    background: none;
+}
+
+.notfound-code::before {
+    color: var(--cyan);
+    animation: notfound-glitch-a 4s steps(1, end) infinite;
+}
+
+.notfound-code::after {
+    color: var(--magenta);
+    animation: notfound-glitch-b 4s steps(1, end) infinite;
+}
+
+@keyframes notfound-glitch-a {
+    0%, 86%, 100% { opacity: 0; transform: none; clip-path: none; }
+    88% { opacity: .9; transform: translate(-6px, 0); clip-path: inset(10% 0 60% 0); }
+    91% { opacity: .9; transform: translate(5px, 0);  clip-path: inset(55% 0 20% 0); }
+    94% { opacity: .9; transform: translate(-3px, 0); clip-path: inset(30% 0 45% 0); }
+}
+
+@keyframes notfound-glitch-b {
+    0%, 86%, 100% { opacity: 0; transform: none; clip-path: none; }
+    88% { opacity: .9; transform: translate(6px, 0);  clip-path: inset(65% 0 10% 0); }
+    91% { opacity: .9; transform: translate(-5px, 0); clip-path: inset(20% 0 62% 0); }
+    94% { opacity: .9; transform: translate(4px, 0);  clip-path: inset(45% 0 30% 0); }
+}
+
+.notfound-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    text-shadow: var(--glow-magenta);
+}
+
+.notfound-terminal {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-left: 3px solid var(--cyan);
+    border-radius: .5rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: .95rem;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.notfound-terminal .prompt { color: var(--cyan); margin-right: .5rem; }
+.notfound-terminal .err { color: var(--magenta); }
+.notfound-path { color: var(--text); }
+
+.notfound-terminal .cursor {
+    display: inline-block;
+    width: .6em;
+    height: 1.1em;
+    margin-left: .3em;
+    vertical-align: text-bottom;
+    background: var(--magenta);
+    animation: notfound-blink 1s steps(1, end) infinite;
+}
+
+@keyframes notfound-blink {
+    50% { opacity: 0; }
+}
+
+.notfound-help {
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+}
+
+.notfound-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.notfound-btn {
+    display: inline-block;
+    padding: .6rem 1.2rem;
+    border: 1px solid var(--cyan);
+    border-radius: .375rem;
+    color: var(--cyan);
+    transition: box-shadow .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.notfound-btn--alt {
+    border-color: var(--magenta);
+    color: var(--magenta);
+}
+
+.notfound-btn:hover,
+.notfound-btn:focus-visible {
+    box-shadow: var(--glow-cyan);
+    outline: none;
+}
+
+.notfound-btn--alt:hover,
+.notfound-btn--alt:focus-visible {
+    box-shadow: var(--glow-magenta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notfound-code::before,
+    .notfound-code::after,
+    .notfound-terminal .cursor {
+        animation: none;
+    }
+}

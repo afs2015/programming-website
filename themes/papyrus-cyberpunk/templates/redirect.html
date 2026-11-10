@@ -1,13 +1,15 @@
+{#- Redirect stub. Used by the hidden about page (-> home) and plugins/redirects.py (REDIRECTS). -#}
+{%- set target = SITEURL ~ "/" ~ (redirect_to if redirect_to is defined and redirect_to else "") -%}
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
     <meta charset="utf-8" />
     <title>{{ SITENAME }}</title>
-    <link rel="canonical" href="{{ SITEURL }}/" />
+    <link rel="canonical" href="{{ target }}" />
     <meta name="robots" content="noindex" />
-    <meta http-equiv="refresh" content="0; url={{ SITEURL }}/" />
+    <meta http-equiv="refresh" content="0; url={{ target }}" />
 </head>
 <body>
-    <p>This page has moved to <a href="{{ SITEURL }}/">{{ SITEURL or "/" }}</a>.</p>
+    <p>This page has moved to <a href="{{ target }}">{{ target }}</a>.</p>
 </body>
 </html>

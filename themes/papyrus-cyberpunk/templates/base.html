@@ -36,7 +36,7 @@
     {#- Open Graph / Twitter link previews #}
     {% set og_title %}{% if article %}{{ article.title|striptags }}{% else %}{{ self.title()|striptags|trim }}{% endif %}{% endset %}
     {% set og_description %}{{ self.description()|striptags|trim|truncate(200) }}{% endset %}
-    {% set og_url = SITEURL ~ "/" ~ ("" if output_file == "index.html" else output_file) %}
+    {% set og_url = SITEURL ~ "/" ~ (output_file[:-10] if output_file.endswith("index.html") else output_file) %}
     {% set custom_image = article.image if article and article.image else "" %}
     {% set og_image = SITEURL ~ "/" ~ (custom_image or SOCIAL_IMAGE) %}
     <link rel="canonical" href="{{ og_url }}" />
@@ -102,7 +102,7 @@
             <li class="mr-4 pt-6"><a {% if current=="home" %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
                     {% endif %} href="{{ SITEURL }}/">Home</a></li>
             <li class="mr-4 pt-6"><a {% if current=="archive" %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
-                    {% endif %} href="{{ SITEURL }}/archives.html">Blog</a></li>
+                    {% endif %} href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Blog</a></li>
             {% if DISPLAY_PAGES_ON_MENU %}
             {% for p in pages if p.title != "About" %}
             <li class="mr-4 pt-6"><a {% if p==page %} class="border-b-2 border-zinc-800 dark:border-zinc-300"
@@ -132,7 +132,7 @@
                     </svg>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ SITEURL }}/archives.html">Blog</a>
+                    <a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Blog</a>
                     <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 320 512">
                         <path
