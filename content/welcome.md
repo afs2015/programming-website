@@ -4,7 +4,7 @@ Category: General
 Slug: welcome
 Summary: First post on my new Pelican-powered site.
 
-For several years, I've wanted to create a website to share my thoughts and experiences as a programmer. This year I finally took the leap and created a programming website using [Pelican](https://getpelican.com/), a Python static site generator and hosted on GitHub Pages.
+For several years, I've wanted to create a website to share my thoughts and experiences as a programmer. This year I finally took the leap and created a programming website using [Pelican](https://getpelican.com/), a Python static site generator and hosted on GitHub Pages. I also modified the theme [Papyrus](https://github.com/pelican-themes/papyrus) taking inspiration from Cyberpunk 2077.
 
 Before I started this project, I the [Boston Python's](https://about.bostonpython.com/) Slack for recommendations and there were many, such as [this helpful list of static site generators](https://github.com/myles/awesome-static-generators).
 
