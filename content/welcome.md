@@ -1,8 +1,19 @@
-Title: Welcome
-Date: 2026-10-10
+Title: Hello World!
+Date: 2026-11-09
 Category: General
 Slug: welcome
 Summary: First post on my new Pelican-powered site.
 
-Hello! This is the first post on my personal website, built with
-[Pelican](https://getpelican.com/) and hosted on GitHub Pages.
+For several years, I've wanted to create a website to share my thoughts and experiences as a programmer. This year I finally took the leap and created a programming website using [Pelican](https://getpelican.com/), a Python static site generator and hosted on GitHub Pages.
+
+Before I started this project, I the [Boston Python's](https://about.bostonpython.com/) Slack for recommendations and there were many, such as [this helpful list of static site generators](https://github.com/myles/awesome-static-generators).
+
+Thank you to everyone from Boston Python who chimed in on that discussion and special thanks to Ricardo Newbery, who recommended many options including the one I ended up going with, Pelican.
+
+I'm planning to using this space to share what I'm working on, things I've learned, and things I find interesting on the way.
+
+
+
+
+
+
