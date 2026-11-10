@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'post_macros.html' as posts with context %}
 {% block html_lang %}{{ article.lang }}{% endblock %}
 {% block title %}{{ article.title|striptags }} | {{ SITENAME }}{% endblock %}
 {% block description %}{{ article.summary or SITE_DESCRIPTION }}{% endblock %}
@@ -18,9 +19,7 @@
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
         <time>{{ article.date|strftime('%B %d, %Y') }}</time>
         <div>
-          {% if article.readtime %}
-          <span>&nbsp;·&nbsp;{{ article.readtime }} min read</span>
-          {% endif %}
+          <span>&nbsp;·&nbsp;{{ posts.read_minutes(article) }} min read</span>
         </div>
         <div>
           {% if article.author != '' %}

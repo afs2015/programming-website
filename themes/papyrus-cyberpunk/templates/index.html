@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% set current = "home" %}
+{% import 'post_macros.html' as posts with context %}
 {% block title %}{{ SITENAME }} — {{ SITE_TAGLINE }}{% endblock %}
 
 {% block content %}
@@ -18,17 +19,7 @@
     <h2 class="cyber-section-title">Recent posts</h2>
     <ul>
         {% for article in articles[:3] %}
-        <li>
-            <a class="home-post" href="{{ SITEURL }}/{{ article.url }}" rel="bookmark">
-                <span class="home-post-title">{{ article.title }}</span>
-                <time class="home-post-date" datetime="{{ article.date.isoformat() }}">
-                    {{ article.date|strftime('%b %d, %Y') }}
-                </time>
-                {% if article.summary %}
-                <span class="home-post-summary">{{ article.summary|striptags }}</span>
-                {% endif %}
-            </a>
-        </li>
+        <li>{{ posts.post_card(article) }}</li>
         {% else %}
         <li class="text-zinc-600">No posts yet.</li>
         {% endfor %}

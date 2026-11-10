@@ -543,3 +543,27 @@ li > a.border-b-2 {
     color: var(--magenta);
     text-shadow: var(--glow-magenta);
 }
+
+/* ---- blog page ------------------------------------------------------ */
+
+.blog-intro {
+    color: var(--text-dim);
+    margin: .5rem 0 2.5rem;
+}
+
+.blog-year {
+    margin-bottom: 2.5rem;
+}
+
+.blog-rss {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: var(--cyan);
+}
+
+.blog-rss:hover {
+    color: var(--magenta);
+    text-shadow: var(--glow-magenta);
+}

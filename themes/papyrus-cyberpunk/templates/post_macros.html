@@ -1,0 +1,20 @@
+{#- Shared post helpers. Import with: {% import 'post_macros.html' as posts with context %} -#}
+
+{#- Estimated reading time at ~230 words per minute, never less than 1 -#}
+{% macro read_minutes(article) -%}
+{{ [((article.content|striptags|wordcount) / 230)|round(0, 'ceil')|int, 1]|max }}
+{%- endmacro %}
+
+{#- Post card used on the homepage and the blog page -#}
+{% macro post_card(article) -%}
+<a class="home-post" href="{{ SITEURL }}/{{ article.url }}" rel="bookmark">
+    <span class="home-post-title">{{ article.title }}</span>
+    <span class="home-post-date">
+        <time datetime="{{ article.date.isoformat() }}">{{ article.date|strftime('%b %d, %Y') }}</time>
+        &middot; {{ read_minutes(article) }} min read
+    </span>
+    {% if article.summary %}
+    <span class="home-post-summary">{{ article.summary|striptags }}</span>
+    {% endif %}
+</a>
+{%- endmacro %}

@@ -4,117 +4,34 @@
 {% block description %}Blog posts by {{ SITENAME }} about Python, Django, open source, and web development.{% endblock %}
 {% set current = "archive" %}
 
-{% macro countyear(year) %}
-{% set name = namespace(y=0) %}
-{% for article in dates %}
-{% if article.date | strftime('%Y') == year %}
-{% set name.y = name.y + 1 %}
-{% endif %}
-{% endfor %}
-{{name.y}}
-{% endmacro %}
-
-{% macro countmonth(month, year) %}
-{% set name = namespace(m=0) %}
-{% for article in dates %}
-{% if article.date | strftime('%B') == month and article.date | strftime('%Y') == year %}
-{% set name.m = name.m + 1 %}
-{% endif %}
-{% endfor %}
-{{name.m}}
-{% endmacro %}
+{% import 'post_macros.html' as posts with context %}
 
 {% block content %}
-<div class="text-zinc-800 dark:text-zinc-300 pb-6">
-    <ul class="flex-col">
-        {% for year, year_group in dates_page.object_list|groupby('date.year')|reverse %}
-        {% for month, month_group in year_group|groupby('date.month')|reverse %}
-        {% for article in month_group %}
-        {% if article == month_group[0] and article == year_group[0] %}
-        <li>
-            <div class="mt-3 mb-4">
-                <h2 class="text-2xl font-semibold">{{(month_group|first).date|strftime('%Y')}}
-                    <sup class="text-sm text-zinc-800 dark:text-zinc-400">
-                        {{ countyear(article.date | strftime('%Y')) }}
-                    </sup>
-                </h2>
-            </div>
-            <div class="md:flex py-2">
-                <div class="flex text-xl font-semibold md:w-40">
-                    {{ (month_group|first).date|strftime('%B') }}
-                    <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        {{ countmonth(article.date | strftime('%B'), article.date | strftime('%Y')) }}
-                    </sup>
-                </div>
-                <div class="flex-1">
-                    <a href="{{ SITEURL }}/{{ article.url }}">
-                        <span class="text-lg">{{ article.title}}</span>
-                        <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                            <time>{{ article.date|strftime('%B %d, %Y') }}</time>
-                            {% if article.readtime %}
-                            <span>&nbsp;·&nbsp;{{ article.readtime }} min read</span>
-                            {% endif %}
-                            {% if article.author != '' %}
-                            <span>&nbsp;·&nbsp;{{ article.author }}</span>
-                            {% endif %}
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </li>
-        {% elif article == month_group[0] %}
-        <li>
-            <div class="md:flex mt-1 py-2">
-                <div class="flex md:w-40 text-xl font-semibold ">
-                    {{ (month_group|first).date|strftime('%B')}}
-                    <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        {{ countmonth(article.date | strftime('%B'), article.date | strftime('%Y')) }}
-                    </sup>
-                </div>
-                <div class="flex-1">
-                    <a href="{{ SITEURL }}/{{ article.url }}">
-                        <span class="text-lg">{{ article.title}}</span>
-                        <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                            <time>{{ article.date|strftime('%B %d, %Y') }}</time>
-                            {% if article.readtime %}
-                            <span>&nbsp;·&nbsp;{{ article.readtime }} min read</span>
-                            {% endif %}
-                            {% if article.author != '' %}
-                            <span>&nbsp;·&nbsp;{{ article.author }}</span>
-                            {% endif %}
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </li>
-        {% else %}
-        <li>
-            <div class="md:flex py-2">
-                <div class="flex md:w-40"></div>
-                <div class="flex-1">
-                    <a href="{{ SITEURL }}/{{ article.url }}">
-                        <span class="text-lg">{{ article.title}}</span>
-                        <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                            <time>{{ article.date|strftime('%B %d, %Y') }}</time>
-                            {% if article.readtime %}
-                            <span>&nbsp;·&nbsp;{{ article.readtime }} min read</span>
-                            {% endif %}
-                            {% if article.author != '' %}
-                            <span>&nbsp;·&nbsp;{{ article.author }}</span>
-                            {% endif %}
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </li>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endfor %}
-    </ul>
+<div class="blog-page text-zinc-800 dark:text-zinc-300 pb-6">
+    <p class="blog-intro">Notes on Python, Django, open source, and things I learn along the way.</p>
+
+    {% for year, year_posts in dates_page.object_list|groupby('date.year')|reverse %}
+    <section class="blog-year">
+        <h2 class="cyber-section-title">{{ year }}</h2>
+        <ul>
+            {% for article in year_posts|sort(attribute='date', reverse=True) %}
+            <li>{{ posts.post_card(article) }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% else %}
+    <p class="text-zinc-600">No posts yet.</p>
+    {% endfor %}
+
+    {% if FEED_ALL_ATOM %}
+    <a class="blog-rss" href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}"
+        type="application/atom+xml">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="5" cy="19" r="2.5"/><path d="M2.5 9.5v3a9 9 0 0 1 9 9h3a12 12 0 0 0-12-12z"/><path d="M2.5 3v3a15.5 15.5 0 0 1 15.5 15.5h3A18.5 18.5 0 0 0 2.5 3z"/></svg>
+        Subscribe via RSS
+    </a>
+    {% endif %}
 </div>
 {% if dates_page.has_other_pages() %}
 {% include 'pagination.html' %}
 {% endif %}
-
 {% endblock %}
