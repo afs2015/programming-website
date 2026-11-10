@@ -2,7 +2,7 @@ Title: Hello World!
 Date: 2026-11-09
 Category: General
 Slug: welcome
-Summary: First post on my new Pelican-powered site.
+Summary: Why I built this site with Pelican, a Python static site generator, and the Boston Python community that helped me pick it.
 
 For several years, I've wanted to create a website to share my thoughts and experiences as a programmer. This year I finally took the leap and created a programming website using [Pelican](https://getpelican.com/), a Python static site generator and hosted on GitHub Pages. I also modified the theme [Papyrus](https://github.com/pelican-themes/papyrus) taking inspiration from Cyberpunk 2077.
 

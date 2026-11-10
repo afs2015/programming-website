@@ -1,5 +1,6 @@
 Title: Talks
 Slug: talks
+Summary: Conference talks by Andrew Selzer on Django and open source, including DjangoCon US 2026, with slides and video.
 
 ## 2026
 

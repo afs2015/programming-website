@@ -1,6 +1,11 @@
 AUTHOR = "Andrew Selzer"
 SITENAME = "Andrew Selzer"
 SITESUBTITLE = "> full-stack senior developer"
+SITE_TAGLINE = "Python & Django Developer in Somerville, MA"
+SITE_DESCRIPTION = (
+    "Andrew Selzer is a full-stack Python and Django developer in Somerville, MA "
+    "who writes and speaks about open source, Django, and web development."
+)
 SITEURL = ""
 
 THEME = "themes/papyrus-cyberpunk"
