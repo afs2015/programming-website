@@ -25,22 +25,21 @@
 {% endmacro %}
 
 {% block content %}
-<div class="md:mt-14 text-zinc-800 dark:text-zinc-300 pb-6">
-    <h1 class="font-bold text-4xl my-10 px-1">Archive</h1>
+<div class="text-zinc-800 dark:text-zinc-300 pb-6">
     <ul class="flex-col">
         {% for year, year_group in dates_page.object_list|groupby('date.year')|reverse %}
         {% for month, month_group in year_group|groupby('date.month')|reverse %}
         {% for article in month_group %}
         {% if article == month_group[0] and article == year_group[0] %}
         <li>
-            <div class="my-6 px-2">
+            <div class="mt-3 mb-4">
                 <h2 class="text-2xl font-semibold">{{(month_group|first).date|strftime('%Y')}}
                     <sup class="text-sm text-zinc-800 dark:text-zinc-400">
                         {{ countyear(article.date | strftime('%Y')) }}
                     </sup>
                 </h2>
             </div>
-            <div class="md:flex p-2">
+            <div class="md:flex py-2">
                 <div class="flex text-xl font-semibold md:w-40">
                     {{ (month_group|first).date|strftime('%B') }}
                     <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
@@ -65,7 +64,7 @@
         </li>
         {% elif article == month_group[0] %}
         <li>
-            <div class="md:flex mt-1 p-2">
+            <div class="md:flex mt-1 py-2">
                 <div class="flex md:w-40 text-xl font-semibold ">
                     {{ (month_group|first).date|strftime('%B')}}
                     <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
@@ -90,7 +89,7 @@
         </li>
         {% else %}
         <li>
-            <div class="md:flex p-2">
+            <div class="md:flex py-2">
                 <div class="flex md:w-40"></div>
                 <div class="flex-1">
                     <a href="{{ SITEURL }}/{{ article.url }}">
