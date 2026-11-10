@@ -9,7 +9,7 @@ from pelicanconf import *
 
 # Set the SITEURL to your GitHub Pages URL before deploying,
 # e.g. "https://<username>.github.io/<repo>" or your custom domain.
-SITEURL = "https://afs2015.github.io/programming-website"
+SITEURL = "https://andrewselzer.dev"
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = "feeds/all.atom.xml"

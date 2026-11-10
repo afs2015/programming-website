@@ -2,4 +2,4 @@
 
 Personal website built with [Pelican](https://getpelican.com/).
 
-Live site: https://afs2015.github.io/programming-website
+Live site: https://andrewselzer.dev
