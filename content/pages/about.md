@@ -19,5 +19,6 @@ When I'm not coding, I'm usually dancing, or playing
 music ([andrewselzer.com](https://andrewselzer.com)).
 
 You can find me on
-[LinkedIn](https://www.linkedin.com/in/andrew-selzer/) and
+[GitHub](https://github.com/afs2015),
+[LinkedIn](https://www.linkedin.com/in/andrew-selzer/), and
 <a rel="me" href="https://mastodon.social/@AndrewSelzer">Mastodon</a>.

@@ -71,30 +71,30 @@
         </li>
       {% endfor %}
     </ul>
-    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
-      {% if article.next_article %}
-      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-l-lg">
-        <a class="flex flex-col pr-2" href="{{ SITEURL }}/{{ article.next_article.url }}">
-          <div class="mx-4 py-2 text-left">
-            <p class="text-zinc-600 dark:text-zinc-300 text-sm">« PREV PAGE</p>
-            <p class="text-left py-1 hover:underline">{{ article.next_article.title }}</p>
-          </div>
-        </a>
-      </div>
-      {% else %}
-      <div class="w-1/2 rounded-l-lg"></div>
+    {#- Neighbouring posts: `articles` is sorted newest first -#}
+    {% set nav = namespace(newer=None, older=None) %}
+    {% for a in articles %}
+      {% if a.url == article.url %}
+        {% if not loop.first %}{% set nav.newer = loop.previtem %}{% endif %}
+        {% if not loop.last %}{% set nav.older = loop.nextitem %}{% endif %}
       {% endif %}
-      {% if article.prev_article %}
-      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-r-lg ">
-        <a class="flex flex-col" href="{{ SITEURL }}/{{ article.prev_article.url }}">
-          <div class="text-right mx-4 py-2">
-            <p class="text-zinc-600 dark:text-zinc-300 text-sm">NEXT PAGE »</p>
-            <p class="text-right py-1 hover:underline">{{ article.prev_article.title }}</p>
-          </div>
-        </a>
-      </div>
+    {% endfor %}
+    {% if nav.newer or nav.older %}
+    <nav class="post-nav" aria-label="More posts">
+      {% if nav.newer %}
+      <a class="home-post post-nav-link" href="{{ SITEURL }}/{{ nav.newer.url }}">
+        <span class="post-nav-label">&larr; Newer post</span>
+        <span class="home-post-title">{{ nav.newer.title }}</span>
+      </a>
       {% endif %}
-    </div>
+      {% if nav.older %}
+      <a class="home-post post-nav-link post-nav-link--older" href="{{ SITEURL }}/{{ nav.older.url }}">
+        <span class="post-nav-label">Older post &rarr;</span>
+        <span class="home-post-title">{{ nav.older.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
     {% if SHARE %}
     <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
       {% for name, link in SHARE %}
