@@ -8,7 +8,6 @@
     <meta name="generator" content="Pelican" />
     <meta name="description" content="{% filter striptags|truncate(160) %}{% block description %}{{ SITE_DESCRIPTION }}{% endblock %}{% endfilter %}">
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
@@ -19,9 +18,11 @@
     <link rel="icon" href="{{ SITEURL }}/favicon.ico" sizes="48x48">
     <link rel="icon" href="{{ SITEURL }}/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="{{ SITEURL }}/apple-touch-icon.png">
+    {% if current == "search" %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/stork.css">
     <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
         href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/stork-dark.css">
+    {% endif %}
     {% if FEED_ALL_ATOM %}
     <link
         href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}"
@@ -86,9 +87,11 @@
     <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
         <div class="flex flex-col pt-4">
             <div class="flex items-center">
-                <h1 class="font-semibold text-2xl cyber-title glitch" data-text="{{ SITENAME }}">
+                {#- On posts the post title is the page's <h1>, so the site name steps down to a <div> #}
+                {% set title_tag = "div" if article else "h1" %}
+                <{{ title_tag }} class="font-semibold text-2xl cyber-title glitch" data-text="{{ SITENAME }}">
                     <a href="{{ SITEURL }}/">{{ SITENAME }}</a>
-                </h1>
+                </{{ title_tag }}>
                 <span class="cyber-status" aria-hidden="true"><span class="cyber-status-dot"></span>ONLINE</span>
             </div>
             {% if SITESUBTITLE %}
