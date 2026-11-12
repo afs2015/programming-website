@@ -758,3 +758,186 @@ li > a.border-b-2 {
     .post-nav { grid-template-columns: 1fr; }
     .post-nav-link--older { grid-column: 1; }
 }
+
+/* ==========================================================================
+   Light mode ("daylight" palette)
+   Opt-in via the nav switch, which sets <html data-theme="light">. Dark stays
+   the default. The same tokens are remapped, so every component follows;
+   accents are deepened so all text clears WCAG AA (4.5:1) on the light surface.
+   ========================================================================== */
+
+:root {
+    color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --void: #f7f4fc;
+    --panel: #ffffff;
+    --panel-line: #e3dcf0;
+    --cyan: #00707f;
+    --magenta: #b0128c;
+    --violet: #6a2fc2;
+    --text: #1e1833;
+    --text-dim: #585073;
+    /* glows become soft tinted halos instead of neon bloom */
+    --glow-cyan: 0 0 10px rgba(0, 112, 127, .22);
+    --glow-magenta: 0 0 10px rgba(176, 18, 140, .2);
+    --glow-violet: 0 0 10px rgba(106, 47, 194, .2);
+}
+
+/* grey Tailwind surfaces (TOC, tags, share bar) join the palette */
+[data-theme="light"] .dark .dark\:bg-zinc-700,
+[data-theme="light"] .dark .dark\:bg-zinc-800,
+[data-theme="light"] .dark .dark\:bg-neutral-700 {
+    background-color: var(--panel) !important;
+    border: 1px solid var(--panel-line);
+}
+
+[data-theme="light"] .dark .dark\:hover\:bg-zinc-800:hover {
+    background-color: #efe9f8 !important;
+}
+
+[data-theme="light"] .cyber-grid {
+    background-image:
+        linear-gradient(rgba(106, 47, 194, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 112, 127, .05) 1px, transparent 1px);
+}
+
+[data-theme="light"] .cyber-scanlines {
+    display: none;
+}
+
+[data-theme="light"] .cyber-title a {
+    animation: none;
+    filter: none;
+}
+
+[data-theme="light"] .home-post:hover {
+    box-shadow: 0 4px 18px rgba(106, 47, 194, .12);
+}
+
+[data-theme="light"] .headshot {
+    box-shadow: 0 6px 24px rgba(106, 47, 194, .22);
+}
+
+[data-theme="light"] .notfound-code {
+    filter: none;
+}
+
+[data-theme="light"] .dark .dark\:prose-pre\:bg-zinc-800 :is(:where(pre):not(:where([class~="not-prose"] *))) {
+    box-shadow: none;
+}
+
+/* syntax colors with enough contrast on white */
+[data-theme="light"] .highlight .nf,
+[data-theme="light"] .highlight .nc,
+[data-theme="light"] .highlight .nb,
+[data-theme="light"] .highlight .nd { color: #9c1a7d !important; }
+[data-theme="light"] .highlight .gd,
+[data-theme="light"] .highlight .gr,
+[data-theme="light"] .highlight .gt { color: #c0263a !important; }
+[data-theme="light"] .highlight .gi { color: #16794a !important; }
+
+/* brief cross-fade when the visitor flips the switch (not on page load) */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition: background-color .35s ease, color .35s ease, border-color .35s ease,
+        box-shadow .35s ease, fill .35s ease !important;
+}
+
+/* ---- theme switch (nav) -----------------------------------------------
+   A small "power toggle": both modes are always visible as icons, and a
+   glowing ring slides to frame the active one.
+   ------------------------------------------------------------------------ */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: 9999px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle-track {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 3.25rem;
+    height: 1.6rem;
+    padding: 0 .3rem;
+    border: 1px solid var(--panel-line);
+    border-radius: 9999px;
+    background: var(--panel);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.theme-toggle:hover .theme-toggle-track {
+    border-color: var(--violet);
+    box-shadow: var(--glow-violet);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+.theme-toggle-icon {
+    position: relative;
+    z-index: 1;
+    width: .9rem;
+    height: .9rem;
+    color: var(--text-dim);
+    opacity: .55;
+    transition: color .3s ease, opacity .3s ease;
+}
+
+/* the sliding ring */
+.theme-toggle-thumb {
+    position: absolute;
+    top: 50%;
+    left: .12rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 9999px;
+    border: 1px solid var(--magenta);
+    box-shadow: var(--glow-magenta);
+    transform: translateY(-50%);
+    transition: transform .3s cubic-bezier(.4, 1.4, .6, 1), border-color .3s ease, box-shadow .3s ease;
+}
+
+/* dark (default): ring on the moon */
+.theme-toggle-icon--moon {
+    color: var(--magenta);
+    opacity: 1;
+}
+
+/* light: ring slides to the sun */
+[data-theme="light"] .theme-toggle-thumb {
+    transform: translate(1.62rem, -50%);
+    border-color: var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+[data-theme="light"] .theme-toggle-icon--moon {
+    color: var(--text-dim);
+    opacity: .55;
+}
+
+[data-theme="light"] .theme-toggle-icon--sun {
+    color: var(--cyan);
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle-thumb,
+    .theme-toggle-icon {
+        transition: none;
+    }
+}
