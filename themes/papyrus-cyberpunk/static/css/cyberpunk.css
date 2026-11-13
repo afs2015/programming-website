@@ -941,3 +941,44 @@ li > a.border-b-2 {
         transition: none;
     }
 }
+
+/* Mobile: the switch moves to the top-right corner, centered on the title
+   row and inset to the same 1rem gutter as the left edge. */
+.site-nav {
+    position: relative;
+}
+
+@media (max-width: 639px) {
+    .nav-theme {
+        position: absolute;
+        top: 1.2rem;
+        right: 1rem;
+        padding-top: 0;
+    }
+
+    .site-nav > div:first-child {
+        padding-right: 4.75rem;
+    }
+}
+
+/* Very narrow phones: drop the decorative ONLINE badge so the name stays on one line */
+@media (max-width: 359px) {
+    .cyber-status {
+        display: none;
+    }
+}
+
+/* Tablet widths: keep the switch off the right edge (lg+ already has a nav margin) */
+@media (min-width: 640px) and (max-width: 1023px) {
+    .nav-theme {
+        margin-right: 1rem;
+    }
+}
+
+/* Mobile: grow the tap target to ~44px tall without moving the switch visually */
+@media (max-width: 639px) {
+    .theme-toggle {
+        padding: .5rem;
+        margin: -.5rem;
+    }
+}
